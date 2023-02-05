@@ -21,3 +21,27 @@
 //   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 // }
 // ```
+
+
+const body = document.querySelector('body');
+const start = document.querySelector('[data-start]');
+const stop = document.querySelector('[data-stop]');
+let intervalId = null;
+
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+}
+
+start.addEventListener('click', () => {
+    intervalId = setInterval(() => {
+        body.style.backgroundColor = getRandomHexColor()
+    }, 1000)
+    start.disabled = true;
+});
+
+stop.addEventListener('click', () => {
+    console.log('bay');
+    body.style.backgroundColor = '';
+    clearInterval(intervalId);
+    start.disabled = false;
+});
