@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Malk0v/js-hw-11.git"
+    "url": "git+https://github.com/malk0v/js-hw-11.git"
   },
   "keywords": [],
   "author": "Anton Malkov antonio.izym@gmai.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Malk0v/js-hw-11/issues"
+    "url": "https://github.com/malk0v/js-hw-11/issues"
   },
   "dependencies": {
     "modern-normalize": "^1.1.0"
