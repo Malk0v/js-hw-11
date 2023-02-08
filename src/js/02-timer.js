@@ -159,7 +159,7 @@ const options = {
     if (selectedDates[0] < Date.now) {
       return alert('Please choose a date in the future');
     }
-    activeBtnStart();
+    // activeBtnStart();
     let intervalId = null;
     let userTime = selectedDates[0].getTime();
 
@@ -180,9 +180,9 @@ const options = {
 };
 flatpickr(dataInput, options);
 
-function activeBtnStart() {
-  btnStart.disabled = false;
-}
+// function activeBtnStart() {
+//   btnStart.disabled = false;
+// }
 
 function btnStartClick() {
 }
