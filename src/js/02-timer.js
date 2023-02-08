@@ -80,6 +80,43 @@
 // };
 // ```
 
+
+// function btnStartClick(time) {
+//   setInterval(() => {
+//     console.log(time)
+//   }, 1000);
+// };
+
+// function convertMs(ms) {
+//   // Number of milliseconds per unit of time
+//   const second = 1000;
+//   const minute = second * 60;
+//   const hour = minute * 60;
+//   const day = hour * 24;
+
+//   // Remaining days
+//   const days = Math.floor(ms / day);
+//   // Remaining hours
+//   const hours = Math.floor((ms % day) / hour);
+//   // Remaining minutes
+//   const minutes = Math.floor(((ms % day) % hour) / minute);
+//   // Remaining seconds
+//   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+
+//   return { days, hours, minutes, seconds };
+// }
+
+// console.log(convertMs()); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
+// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+// btnStart.addEventListener('click', () => {
+//   setInterval(() => {
+//     console.log(Number(dataInput.value) - time);
+//     console.log(dataInput.value);
+//     console.log(time);
+//   }, 1000);
+// });
+
 // ### Выбор даты
 
 // Метод `onClose()` из обьекта параметров вызывается каждый раз при закрытии
@@ -96,7 +133,86 @@
 // - При нажатии на кнопку «Start» начинается отсчет времени до выбранной даты с
 //   момента нажатия.
 
+
+
 // ### Отсчет времени
+
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+
+const btnStart = document.querySelector('[data-start]');
+const dataInput = document.querySelector(['#datetime-picker']);
+const clockface = document.querySelector('.js-clockface');
+const UIDays = document.querySelector('[data-days]');
+const UIHours = document.querySelector('[data-hours]');
+const UIMinutes = document.querySelector('[data-minutes]');
+const UISeconds = document.querySelector('[data-seconds]'); 
+
+// btnStart.addEventListener('click', btnStartClick);
+
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    if (selectedDates[0] < Date.now) {
+      return alert('Please choose a date in the future');
+    }
+    activeBtnStart();
+    let intervalId = null;
+    let userTime = selectedDates[0].getTime();
+
+    intervalId = setInterval(() => {
+      const time = convertMs(userTime - Date.now());
+
+      if (Date.now() > userTime - 1000) {
+        clearInterval(intervalId);
+      }
+
+      UIDays.textContent = time.days;
+      UIHours.textContent = time.hours;
+      UIMinutes.textContent = time.minutes;
+      UISeconds.textContent = time.seconds;
+      updateClockface(time);
+    }, 1000);
+  }
+};
+flatpickr(dataInput, options);
+
+function activeBtnStart() {
+  btnStart.disabled = false;
+}
+
+function btnStartClick() {
+}
+
+function pad(value) {
+  return String(value).padStart(2, '0');
+}
+
+function updateClockface({ days, hours, minutes, seconds}) {
+  clockface.textContent = `${days}: ${hours}: ${minutes}: ${seconds}`;
+}
+  
+function convertMs(ms) {
+  // Number of milliseconds per unit of time
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+
+  // Remaining days
+  const days = pad(Math.floor(ms / day));
+  // Remaining hours
+  const hours = pad(Math.floor((ms % day) / hour));
+  // Remaining minutes
+  const minutes = pad(Math.floor(((ms % day) % hour) / minute));
+  // Remaining seconds
+  const seconds = pad(Math.floor((((ms % day) % hour) % minute) / second));
+
+  return { days, hours, minutes, seconds };
+}
 
 // При нажатии на кнопку «Start» скрипт должен вычислять раз в секунду сколько
 // времени осталось до указанной даты и обновлять интерфейс таймера, показывая
@@ -155,25 +271,29 @@
 // библиотеку [notiflix](https://github.com/notiflix/Notiflix#readme).
 
 
-function convertMs(ms) {
-  // Number of milliseconds per unit of time
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
 
-  // Remaining days
-  const days = Math.floor(ms / day);
-  // Remaining hours
-  const hours = Math.floor((ms % day) / hour);
-  // Remaining minutes
-  const minutes = Math.floor(((ms % day) % hour) / minute);
-  // Remaining seconds
-  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
-  return { days, hours, minutes, seconds };
-}
 
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+
+// function convertMs(ms) {
+//   // Number of milliseconds per unit of time
+//   const second = 1000;
+//   const minute = second * 60;
+//   const hour = minute * 60;
+//   const day = hour * 24;
+
+//   // Remaining days
+//   const days = Math.floor(ms / day);
+//   // Remaining hours
+//   const hours = Math.floor((ms % day) / hour);
+//   // Remaining minutes
+//   const minutes = Math.floor(((ms % day) % hour) / minute);
+//   // Remaining seconds
+//   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+
+//   return { days, hours, minutes, seconds };
+// }
+
+// console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
+// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
