@@ -156,7 +156,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    if (selectedDates[0] < Date.now) {
+    if (selectedDates[0] < Date.now()) {
       return alert('Please choose a date in the future');
     }
     // activeBtnStart();
