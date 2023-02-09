@@ -140,7 +140,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-const btnStart = document.querySelector('[data-start]');
+// const btnStart = document.querySelector('[data-start]');
 const dataInput = document.querySelector(['#datetime-picker']);
 const clockface = document.querySelector('.js-clockface');
 const UIDays = document.querySelector('[data-days]');
