@@ -157,7 +157,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] < Date.now()) {
-      return alert('Please choose a date in the future');
+      return alert('Пожалуйста выберете дату в будущем');
     }
     // activeBtnStart();
     let intervalId = null;
