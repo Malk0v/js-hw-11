@@ -137,6 +137,8 @@
 
 // ### Отсчет времени
 
+const YEAR_TIME = 1704056520000;
+
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
@@ -162,9 +164,11 @@ const options = {
     // activeBtnStart();
     let intervalId = null;
     let userTime = selectedDates[0].getTime();
+    console.log(selectedDates[0].getTime());
 
     intervalId = setInterval(() => {
       const time = convertMs(userTime - Date.now());
+      const tim = convertMs(1704056520000 - Date.now());
 
       if (Date.now() > userTime - 1000) {
         clearInterval(intervalId);
@@ -174,7 +178,7 @@ const options = {
       UIHours.textContent = time.hours;
       UIMinutes.textContent = time.minutes;
       UISeconds.textContent = time.seconds;
-      updateClockface(time);
+      updateClockface(tim);
     }, 1000);
   }
 };
@@ -190,6 +194,7 @@ function btnStartClick() {
 function pad(value) {
   return String(value).padStart(2, '0');
 }
+
 
 function updateClockface({ days, hours, minutes, seconds}) {
   clockface.textContent = `${days}: ${hours}: ${minutes}: ${seconds}`;
@@ -213,6 +218,11 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
+
+setInterval(() => {
+  const yearTime = convertMs(YEAR_TIME - Date.now());
+  updateClockface(yearTime);
+}, 1000);
 
 // При нажатии на кнопку «Start» скрипт должен вычислять раз в секунду сколько
 // времени осталось до указанной даты и обновлять интерфейс таймера, показывая
