@@ -3,6 +3,10 @@
 }
 
 body {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -12,7 +16,59 @@ body {
   line-height: 1.5;
 }
 
+body > p {
+  display: inline-block;
+padding: 10px;
+background-color: rgba(162, 48, 48, 0.308);
+border-radius: 10px;
+}
+
 img {
   display: block;
   max-width: 100%;
+}
+
+
+.wrapper_input{
+  display: inline-block;
+  padding: 10px;
+  background-color: rgba(174, 180, 180, 0.183);
+}
+.input{
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border-radius: 5px;
+background-color: rgba(255, 235, 205, 0.084);
+}
+
+.year_time{
+padding: 20px;
+margin-left: auto;
+margin-right: auto;
+background-color: rgba(235, 203, 182, 0.441);
+}
+
+.year_time > p{
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+.timer{
+  display: inline-flex;
+  justify-content: space-around;
+  margin-left: auto;
+  margin-right: auto;
+padding: 20px;
+max-width: 700px;
+border-radius: 10px;
+background-color: rgba(131, 185, 232, 0.385);
+}
+
+.field{
+margin: 5px;
+font-style:italic;
+font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
