@@ -6,7 +6,7 @@ btn.addEventListener('click', (e) => {
     return;
   }
 
-  text.innerHTML = '';
+  
 
   makeOrder(e.target.textContent).then(onMakeOrderSuccess).catch(onMakeOrderError);
   // console.log(btn.textContent);
@@ -34,11 +34,13 @@ const makeOrder = dish => {
 // makeOrder('пирожок').then(onMakeOrderSuccess).catch(onMakeOrderError);
 
 function onMakeOrderSuccess(result) {
+  text.innerHTML = '';
   text.insertAdjacentHTML('beforeend', result);
   console.log(result);
 }
 
 function onMakeOrderError(error) {
+  text.innerHTML = '';
   text.insertAdjacentHTML('beforeend', error);
   console.log(error);
 }
