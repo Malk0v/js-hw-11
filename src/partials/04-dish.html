@@ -19,8 +19,16 @@
     <p class="userArea"></p>
 
     <style>
+
+        @media screen and (max-width: 665px) {
+
+    ul{
+    display: flex;
+    flex-wrap: wrap;
+    }}
+
         ul{
-            list-style: none;
+        list-style: none;
         display: flex;
         justify-content: space-around;
         }
@@ -35,6 +43,12 @@
         button:hover{
             background-color: rgba(67, 175, 105, 0.882);
         }
+
+        p{
+        padding: 20px;
+        margin: 20px;
+        }
+
     </style>
     <script src="../js/04-dish.js"></script>
 </body>
