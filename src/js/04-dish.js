@@ -1,20 +1,18 @@
 const btn = document.querySelector('ul');
 const text = document.querySelector('.userArea');
 
-btn.addEventListener('click', (e) => {
+btn.addEventListener('click', e => {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
 
-  
-
-  makeOrder(e.target.textContent).then(onMakeOrderSuccess).catch(onMakeOrderError);
+  makeOrder(e.target.textContent)
+    .then(onMakeOrderSuccess)
+    .catch(onMakeOrderError);
   // console.log(btn.textContent);
 
   // text.insertAdjacentHTML('beforeend', e.target.textContent);
-
 });
-
 
 const makeOrder = dish => {
   const DELAY = 1000;
@@ -26,7 +24,9 @@ const makeOrder = dish => {
       if (passed) {
         resolve(`😀 вот ваше блюдо, "${dish}"`);
       }
-      reject(`😓 извините закончились продукты для, "${dish}", повторите чуть попозже`);
+      reject(
+        `😓 извините закончились продукты для, "${dish}", повторите чуть попозже`
+      );
     }, DELAY);
   }));
 };
@@ -44,4 +44,3 @@ function onMakeOrderError(error) {
   text.insertAdjacentHTML('beforeend', error);
   console.log(error);
 }
- 
