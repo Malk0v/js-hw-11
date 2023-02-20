@@ -13,28 +13,85 @@
 // задержку в миллисекундах, шаг увеличения задержки для каждого промиса после
 // первого и количество промисов которое необходимо создать.
 
-// ```html
-// <form class="form">
-//   <label>
-//     First delay (ms)
-//     <input type="number" name="delay" required />
-//   </label>
-//   <label>
-//     Delay step (ms)
-//     <input type="number" name="step" required />
-//   </label>
-//   <label>
-//     Amount
-//     <input type="number" name="amount" required />
-//   </label>
-//   <button type="submit">Create promises</button>
-// </form>
-// ```
+
+import Notiflix from 'notiflix';
+
+// console.log(Notiflix);
+// Notiflix.Notify.success('Sol lucet omnibus');
+// Notiflix.Notify.failure('Qui timide rogat docet negare');
+// Notiflix.Notify.warning('Memento te hominem esse');
+// Notiflix.Notify.info('Cogito ergo sum');
+
+const refs = {
+  firstDelay: document.querySelector('.delay'),
+  stepDelay: document.querySelector('.step'),
+  amount: document.querySelector('.amound'),
+  button: document.querySelector('.button'),
+};
+
+Notiflix.Notify.success('Привет, заполни поля');
+ 
+refs.button.addEventListener('click', e => {
+  e.preventDefault();
+
+  const delay = refs.firstDelay.value;
+  const stepValue = refs.stepDelay.value;
+  const amountValue = Number(refs.amount.value);
+
+  const timeoutId = setTimeout(() => {
+    Notiflix.Notify.info('запуск!');
+
+    let position = 0;
+    // ниже код для дополнительной проверки, в этом примере он не нужен
+    let amountCounter = false;
+
+    const intervaId = setInterval(() => {
+      if (position >= amountValue || amountCounter) {
+        Notiflix.Notify.warning(`было запущено ${position} промисов, останавливаем интервал`);
+        clearInterval(intervaId);
+        return
+      }
+
+      position += 1;
+     
+      function createPromise(position, delay) {
+        return new Promise((resolve, reject) => {
+          const shouldResolve = Math.random() > 0.5;
+
+          if (shouldResolve) {
+            resolve(
+              Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay} ms`))
+          } else {
+            reject(
+              Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay} ms`));
+            ;
+          }
+        });
+      }
+
+      createPromise(position, delay)
+        .then(() => {
+        })
+        .catch(() => {
+        });
+        
+    }, stepValue);
+  }, delay);
+
+});
 
 // Напиши скрипт, который при сабмите формы вызывает функцию
 // `createPromise(position, delay)` столько раз, сколько ввели в поле `amount`. При
 // каждом вызове передай ей номер создаваемого промиса (`position`) и задержку
 // учитывая введенную пользователем первую задержку (`delay`) и шаг (`step`).
+
+
+// Дополни код функции `createPromise` так, чтобы она возвращала **один промис**,
+// который выполянется или отклоняется через `delay` времени. Значением промиса
+// должен быть объект, в котором будут свойства `position` и `delay` со значениями
+// одноименных параметров. Используй начальный код функции для выбора того, что
+// нужно сделать с промисом - выполнить или отклонить.
+
 
 // ```js
 // function createPromise(position, delay) {
@@ -45,13 +102,8 @@
 //     // Reject
 //   }
 // }
-// ```
+// //
 
-// Дополни код функции `createPromise` так, чтобы она возвращала **один промис**,
-// который выполянется или отклоняется через `delay` времени. Значением промиса
-// должен быть объект, в котором будут свойства `position` и `delay` со значениями
-// одноименных параметров. Используй начальный код функции для выбора того, что
-// нужно сделать с промисом - выполнить или отклонить.
 
 // ```js
 // createPromise(2, 1500)
@@ -70,14 +122,3 @@
 
 // Для отображения уведомлений пользователю вместо `console.log()` используй
 // библиотеку [notiflix](https://github.com/notiflix/Notiflix#readme).
-
-
-
-function createPromise(position, delay) {
-  const shouldResolve = Math.random() > 0.3;
-  if (shouldResolve) {
-    // Fulfill
-  } else {
-    // Reject
-  }
-}
