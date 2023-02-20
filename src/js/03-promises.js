@@ -47,7 +47,7 @@ refs.button.addEventListener('click', e => {
 
     const intervaId = setInterval(() => {
       if (position >= amountValue || amountCounter) {
-        Notiflix.Notify.warning(`было запущено ${position} промисов, останавливаем выролнение скрипта`);
+        Notiflix.Notify.warning(`Было запущено ${position} промисов, останавливаем выполнение скрипта`);
         clearInterval(intervaId);
         return
       }
