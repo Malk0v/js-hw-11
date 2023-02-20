@@ -39,7 +39,7 @@ refs.button.addEventListener('click', e => {
   const amountValue = Number(refs.amount.value);
 
   const timeoutId = setTimeout(() => {
-    Notiflix.Notify.info('запуск!');
+    Notiflix.Notify.info('Запуск!');
 
     let position = 0;
     // ниже код для дополнительной проверки, в этом примере он не нужен
@@ -47,29 +47,31 @@ refs.button.addEventListener('click', e => {
 
     const intervaId = setInterval(() => {
       if (position >= amountValue || amountCounter) {
-        Notiflix.Notify.warning(`было запущено ${position} промисов, останавливаем интервал`);
+        Notiflix.Notify.warning(`было запущено ${position} промисов, останавливаем выролнение скрипта`);
         clearInterval(intervaId);
         return
       }
 
       position += 1;
      
-      function createPromise(position, delay) {
+      function createPromise(position, stepValue) {
         return new Promise((resolve, reject) => {
           const shouldResolve = Math.random() > 0.5;
 
           if (shouldResolve) {
             resolve(
-              Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay} ms`))
+              Notiflix.Notify.success(`✅ Выполнен запрос номер ${position} с задержкой ${stepValue} мс`))
           } else {
             reject(
-              Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay} ms`));
+              Notiflix.Notify.failure(`❌ Отклоненный запрос номер ${position} с задержкой ${stepValue} мс`
+              )
+            );
             ;
           }
         });
       }
 
-      createPromise(position, delay)
+      createPromise(position, stepValue)
         .then(() => {
         })
         .catch(() => {
