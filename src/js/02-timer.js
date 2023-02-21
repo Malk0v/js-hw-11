@@ -137,6 +137,13 @@
 
 // ### Отсчет времени
 
+
+import Notiflix from 'notiflix';
+
+console.log(Notiflix);
+Notiflix.Notify.success('Выберете дату');
+
+
 const YEAR_TIME = 1704056520000;
 
 import flatpickr from 'flatpickr';
@@ -159,7 +166,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] < Date.now()) {
-      return alert('Пожалуйста выберете дату в будущем');
+      return Notiflix.Notify.info('Пожалуйста выберете дату в будущем');
     }
     // activeBtnStart();
     let intervalId = null;
